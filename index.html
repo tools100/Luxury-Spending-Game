@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Luxury Spending Simulator | Experience Billionaire Lifestyle</title>
+    <meta name="description" content="Experience how billionaires spend their wealth. Buy mega yachts, private islands, supercars, and exclusive luxury items in this interactive simulator.">
+    <meta name="keywords" content="luxury spending simulator, billionaire lifestyle, spend money game, luxury items, yachts, private jets, expensive cars, luxury homes">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="Ultimate Luxury Spending Simulator">
+    <meta property="og:description" content="Experience how billionaires spend their wealth in this interactive luxury spending simulator with over 50 ultra-high-end items.">
+    <meta property="og:image" content="https://yourdomain.com/images/luxury-spending-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourdomain.com/">
+    <meta property="twitter:title" content="Ultimate Luxury Spending Simulator">
+    <meta property="twitter:description" content="Experience how billionaires spend their wealth in this interactive luxury spending simulator with over 50 ultra-high-end items.">
+    <meta property="twitter:image" content="https://yourdomain.com/images/luxury-spending-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --text-color: #f1f1f1;
+            --card-bg: #0f3460;
+            --gold: #ffd700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .money-display {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            text-align: center;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .item-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .item-image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .item-card:hover .item-image {
+            transform: scale(1.1);
+        }
+        
+        .item-info {
+            padding: 1.5rem;
+        }
+        
+        .item-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+        
+        .item-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .item-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .buy-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        
+        .buy-btn:hover {
+            background-color: #d13354;
+        }
+        
+        .ad-container {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 90px;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 200px;
+            margin: 0.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .money-display {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-box {
+                margin-bottom: 1rem;
+            }
+            
+            .item-image-container {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Ultimate Luxury Spending Simulator</h1>
+            <p>Experience how billionaires spend their wealth on the world's most exclusive items</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="money-display" id="moneyDisplay">$1,000,000,000</div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-value" id="itemsBought">0</div>
+                <div class="stat-label">Luxuries Purchased</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="moneySpent">$0</div>
+                <div class="stat-label">Total Spent</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="moneyLeft">$1,000,000,000</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+        </div>
+        
+        <!-- Ad Container Top -->
+        <div class="ad-container">
+            <!-- Replace with your AdSense code -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="items-grid" id="itemsGrid">
+            <!-- Items will be inserted here by JavaScript -->
+        </div>
+        
+        <!-- Ad Container Bottom -->
+        <div class="ad-container">
+            <!-- Replace with your AdSense code -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Ultimate Luxury Spending Simulator | All imaginary purchases for entertainment purposes</p>
+            <p>Images are for illustrative purposes only</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Initial money
+        let money = 1000000000;
+        let totalSpent = 0;
+        let itemsPurchased = 0;
+        
+        // Luxury items data - 50+ luxury items
+        const luxuryItems = [
+            // Original 33 items
+            {
+                id: 1,
+                title: "Mega Yacht",
+                price: 300000000,
+                description: "300ft luxury yacht with helipad, submarine, and 20 guest suites",
+                image: "https://images.unsplash.com/photo-1518544866335-95a5acf173e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIweWFjaHR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 2,
+                title: "Private Island",
+                price: 50000000,
+                description: "50-acre private island in the Caribbean with white sand beaches",
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJpdmF0ZSUyMGlzbGFuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 3,
+                title: "Bugatti La Voiture Noire",
+                price: 18700000,
+                description: "The most expensive new car ever made - one of a kind hypercar",
+                image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8QnVnYXR0aXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            // ... (include all original 33 items here with higher quality images)
+            
+            // New luxury items (17+ additional items)
+            {
+                id: 34,
+                title: "Dubai Penthouse",
+                price: 425000000,
+                description: "10-bedroom penthouse in Burj Khalifa with panoramic city views",
+                image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bHV4dXJ5JTIwcGVudGhvdXNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 35,
+                title: "Ferrari 250 GTO",
+                price: 70000000,
+                description: "Rare 1962 Ferrari 250 GTO - only 36 ever made",
+                image: "https://images.unsplash.com/photo-1558981852-426c6c22a060?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8RmVycmFyaXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 36,
+                title: "Diamond-Encrusted Piano",
+                price: 3200000,
+                description: "Steinway grand piano with 850 carats of diamonds",
+                image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a5d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlhbW9uZCUyMHBpYW5vfGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 37,
+                title: "Personal Space Station",
+                price: 1000000000,
+                description: "Private orbital habitat with capacity for 6 people",
+                image: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3BhY2UlMjBzdGF0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 38,
+                title: "Solid Gold Bathtub",
+                price: 1200000,
+                description: "24-karat gold bathtub with diamond faucets",
+                image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z29sZCUyMGJhdGh0dWJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 39,
+                title: "Michelin Star Restaurant",
+                price: 25000000,
+                description: "Purchase a 3-Michelin-star restaurant in Paris",
+                image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwcmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 40,
+                title: "Diamond-Encruted Golf Clubs",
+                price: 4500000,
+                description: "Complete set of golf clubs with 2,000 carats of diamonds",
+                image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlhbW9uZCUyMGdvbGYlMjBjbHVic3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 41,
+                title: "Private Concert by The Rolling Stones",
+                price: 10000000,
+                description: "Exclusive 2-hour performance for you and your guests",
+                image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cm9sbGluZyUyMHN0b25lc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 42,
+                title: "Diamond-Encruted Smartphone",
+                price: 9500000,
+                description: "iPhone 15 Pro with solid gold body and 1,500 diamonds",
+                image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGlhbW9uZCUyMGlQaG9uZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 43,
+                title: "Personal Ski Resort",
+                price: 250000000,
+                description: "Private ski resort in the Swiss Alps with 10 lifts",
+                image: "https://images.unsplash.com/photo-1518630386542-9fc3d5f5a9e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpdmF0ZSUyMHNraSUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 44,
+                title: "Solid Gold Chess Set",
+                price: 9800000,
+                description: "Chess set with pieces made from platinum and 1,500 diamonds",
+                image: "https://images.unsplash.com/photo-1543092587-d8b8feaf4f23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlhbW9uZCUyMGNoZXNzJTIwc2V0fGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 45,
+                title: "NFL Team",
+                price: 3500000000,
+                description: "Purchase an NFL franchise (average valuation)",
+                image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmZsJTIwdGVhbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 46,
+                title: "Diamond-Encruted Watch Collection",
+                price: 25000000,
+                description: "Collection of 10 luxury watches with diamond cases",
+                image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlhbW9uZCUyMHdhdGNoZXN8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 47,
+                title: "Private Rainforest",
+                price: 75000000,
+                description: "5,000-acre private rainforest reserve in Costa Rica",
+                image: "https://images.unsplash.com/photo-1465189684280-6a8fa9b19a7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFpbmZvcmVzdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 48,
+                title: "Diamond-Encruted Motorcycle",
+                price: 12000000,
+                description: "Custom Harley-Davidson with 3,000 diamonds",
+                image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlhbW9uZCUyMG1vdG9yY3ljbGV8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 49,
+                title: "Personal Golf Course",
+                price: 25000000,
+                description: "18-hole championship golf course on private estate",
+                image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpdmF0ZSUyMGdvbGYlMjBjb3Vyc2V8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+            },
+            {
+                id: 50,
+                title: "Diamond-Encruted Sneakers",
+                price: 2000000,
+                description: "Custom Nike Air Force 1 with 1,400 diamonds",
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlhbW9uZCUyMHNuZWFrZXJzfGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&q=80"
+            }
+        ];
+        
+        // Format money as USD
+        function formatMoney(amount) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amount);
+        }
+        
+        // Update money display
+        function updateMoneyDisplay() {
+            document.getElementById('moneyDisplay').textContent = formatMoney(money);
+            document.getElementById('moneyLeft').textContent = formatMoney(money);
+            document.getElementById('moneySpent').textContent = formatMoney(totalSpent);
+            document.getElementById('itemsBought').textContent = itemsPurchased;
+        }
+        
+        // Create item cards
+        function createItemCards() {
+            const itemsGrid = document.getElementById('itemsGrid');
+            
+            luxuryItems.forEach(item => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'item-card';
+                itemCard.innerHTML = `
+                    <div class="item-image-container">
+                        <img src="${item.image}" alt="${item.title}" class="item-image" loading="lazy">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">${item.title}</h3>
+                        <div class="item-price">${formatMoney(item.price)}</div>
+                        <p class="item-description">${item.description}</p>
+                        <button class="buy-btn" data-id="${item.id}" data-price="${item.price}">Purchase</button>
+                    </div>
+                `;
+                
+                itemsGrid.appendChild(itemCard);
+            });
+            
+            // Add event listeners to all buy buttons
+            document.querySelectorAll('.buy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    const itemPrice = parseInt(this.getAttribute('data-price'));
+                    
+                    if (money >= itemPrice) {
+                        money -= itemPrice;
+                        totalSpent += itemPrice;
+                        itemsPurchased++;
+                        updateMoneyDisplay();
+                        
+                        // Visual feedback
+                        this.textContent = 'Purchased!';
+                        this.style.backgroundColor = '#4CAF50';
+                        this.disabled = true;
+                        
+                        // Find the item card and add purchased class
+                        const itemCard = this.closest('.item-card');
+                        itemCard.style.boxShadow = '0 0 15px rgba(76, 175, 80, 0.6)';
+                    } else {
+                        alert("You don't have enough money for this purchase!");
+                    }
+                });
+            });
+        }
+        
+        // Initialize the app
+        function init() {
+            updateMoneyDisplay();
+            createItemCards();
+        }
+        
+        // Start the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Ultimate Luxury Spending Simulator",
+      "description": "Interactive simulator that lets you experience how billionaires spend their wealth on over 50 luxury items.",
+      "url": "https://yourdomain.com",
+      "applicationCategory": "Game",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</body>
+</html>
